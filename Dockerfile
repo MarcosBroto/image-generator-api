@@ -1,18 +1,24 @@
-# Usa una imagen base con Python
-FROM python:3.10
+# Use an official Python 3.11 slim image as a base image
+FROM python:3.11-slim
 
-# Establece el directorio de trabajo dentro del contenedor
+# Set the working directory in the container
 WORKDIR /app
 
-# Copia los archivos del proyecto
-COPY src /app
-COPY requirements.txt /app
+# Copy the requirements file into the container
+COPY requirements.txt .
 
-# Instala las dependencias
-RUN pip install --no-cache-dir -r /app/requirements.txt
+# Upgrade pip to the latest version
+RUN python -m pip install --upgrade pip
 
-# Expone el puerto 8080 (Cloud Run usa este puerto por defecto)
+# Install any needed packages specified in requirements.txt
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Copy the rest of the application code to the container
+COPY main.py .
+
+# Cloud Run expects the application to listen on port 8080
 EXPOSE 8080
 
-# Comando para ejecutar la API
-CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8080"]
+# Run the application with uvicorn on container startup using exec form,
+# allowing the port to be configured by the environment variable PORT (defaulting to 8080)
+CMD exec uvicorn main:app --host 0.0.0.0 --port=${PORT:-8080}
