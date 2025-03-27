@@ -5,7 +5,6 @@ import json
 import datetime
 import sys
 import os
-import uvicorn
 from pydantic import BaseModel
 from vertexai.preview.vision_models import ImageGenerationModel
 import vertexai
