@@ -1,0 +1,1 @@
+gcloud builds submit --tag gcr.io/image-generator-api-455015/image-generator-api .
