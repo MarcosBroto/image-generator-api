@@ -69,8 +69,3 @@ def generate_image(description: string):
     )
 
     return images[0]
-
-
-if __name__ == "__main__":
-    port = int(os.getenv("PORT", 8080))  # Usa 8080 por defecto
-    uvicorn.run(app, host="0.0.0.0", port=port)
