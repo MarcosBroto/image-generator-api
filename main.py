@@ -4,6 +4,7 @@ import json
 import datetime
 import sys
 import os
+import uvicorn
 
 app = FastAPI()
 
@@ -34,3 +35,8 @@ async def read_root():
 
     # Return the JSON response to the client
     return response_json
+
+
+if __name__ == "__main__":
+    port = int(os.getenv("PORT", 8080))  # Usa 8080 por defecto
+    uvicorn.run(app, host="0.0.0.0", port=port)
