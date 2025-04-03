@@ -11,8 +11,8 @@ import vertexai
 
 app = FastAPI()
 
-if not sys.platform.startswith("linux"):
-    os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "C:/Google/image-generator-api-455015-381fd368b2df.json"
+#if not sys.platform.startswith("linux"):
+#    os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "C:/Google/image-generator-api-455015-381fd368b2df.json"
 
 # Initialize the Google Cloud Storage client
 storage_client = storage.Client()
